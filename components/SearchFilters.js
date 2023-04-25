@@ -14,22 +14,23 @@ const SearchFilters = () => {
     const router = useRouter();
 
     const searchProperties = (filterValues) => {
-        // console.log(filterValues);
         const path = router.pathname;
-        // console.log('path:', path);
-
-        const query = router;
-        // console.log('query: ', query);
+        const  { query } = router;
         
         const values = getFilterValues(filterValues);
 
         values.forEach((item) => {
-            query[item.name] = item.value;
+            if(item.value && filterValues?.[item.name]){
+                query[item.name] = item.value;
+            }
         })
 
         router.push({pathname: path, query});
 
     } 
+
+
+    
 
     // console.log('filters', filters)
     return (

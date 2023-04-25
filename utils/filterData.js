@@ -47,7 +47,7 @@ export const filterData = [
         { name: '700,000', value: '700000' },
         { name: '800,000', value: '800000' },
         { name: '900,000', value: '900000' },
-        { name: '1000,000', value: '1000000' },
+        { name: '1,000,000', value: '1000000' },
       ],
       placeholder: 'Max Price(AED)',
       queryName: 'maxPrice',
@@ -146,6 +146,7 @@ export const filterData = [
       bathsMin,
       sort,
       locationExternalIDs,
+      furnishingStatus
     } = filterValues;
   
     const values = [
@@ -189,6 +190,10 @@ export const filterData = [
         name: 'categoryExternalID',
         value: categoryExternalID,
       },
+      {
+        name: 'furnishingStatus',
+        value: furnishingStatus
+      }
     ];
   
     return values;

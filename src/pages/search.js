@@ -36,7 +36,7 @@ const Search = ({properties}) => {
                 Properties {router.query.purpose}
             </Text>
             <Flex flexWrap="wrap">
-                {properties.map((property) => <Property property={property} key={property.id} />)}
+                {properties?.map((property) => <Property property={property} key={property.id} />)}
             </Flex>
             {properties.length === 0 && (
             <Flex justifyContent="center" alignItems="center" flexDirection="column" marginTop="5" marginBottom="5">
@@ -60,9 +60,11 @@ export async function getServerSideProps({ query }) {
     const areaMax = query.areaMax || '35000';
     const locationExternalIDs = query.locationExternalIDs || '5002';
     const categoryExternalID = query.categoryExternalID || '4';
+    const furnishingStatus = query.furnishingStatus || 'furnished';
   
-    const data = await fetchApi(`${baseUrl}/properties/list?locationExternalIDs=${locationExternalIDs}&purpose=${purpose}&categoryExternalID=${categoryExternalID}&bathsMin=${bathsMin}&rentFrequency=${rentFrequency}&priceMin=${minPrice}&priceMax=${maxPrice}&roomsMin=${roomsMin}&sort=${sort}&areaMax=${areaMax}`);
+    let data = await fetchApi(`${baseUrl}/properties/list?locationExternalIDs=${locationExternalIDs}&purpose=${purpose}&categoryExternalID=${categoryExternalID}&bathsMin=${bathsMin}&rentFrequency=${rentFrequency}&priceMin=${minPrice}&priceMax=${maxPrice}&roomsMin=${roomsMin}&sort=${sort}&areaMax=${areaMax}&furnishingStatus=${furnishingStatus}`);
     // console.log('data:', data);
+    data = JSON.parse(JSON.stringify(data));
   
     return {
       props: {
